@@ -47,8 +47,16 @@ class MainActivity : BaseActivity() {
                         runOnUiThread {
                             if (code == 200) {
                                 Toast.makeText(mContext, "로그인 성공", Toast.LENGTH_SHORT).show()
+                            } else if (code == 400) {
+                                Toast.makeText(mContext, "존재하지 않은 이메일입니다.", Toast.LENGTH_SHORT)
+                                    .show()
+
+//                                message String으로 실패 사유를 알려준다.
+//                                JSON 파싱으로 추출해서 -> "로그인 실패" 대신 서버가 알려준 실패 사유를 띄우자.
+
                             } else {
-                                Toast.makeText(mContext, "로그인 실패", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(mContext, "비밀번호가 틀립니다.", Toast.LENGTH_SHORT).show()
+
                             }
 
                         }
