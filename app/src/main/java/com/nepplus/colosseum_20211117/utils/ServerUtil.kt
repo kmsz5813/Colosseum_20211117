@@ -94,7 +94,7 @@ class ServerUtil {
             val urlString = "${HOST_URL}/user"
 
             val forData = FormBody.Builder()
-                .add("eamil", eamil)
+                .add("email", eamil)
                 .add("password",pw)
                 .add("nick_name",nickname)
                 .build()
