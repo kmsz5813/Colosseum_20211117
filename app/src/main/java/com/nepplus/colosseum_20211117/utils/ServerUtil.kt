@@ -8,11 +8,11 @@ import java.io.IOException
 class ServerUtil {
 
     interface JsonResponseHandler {
-        fun onResponse( jsonObj : JSONObject )
+        fun onResponse(jsonObj: JSONObject)
 
     }
 
-    companion object{
+    companion object {
 //        여기에 적는 변수 / 함수는 =>JAVA의 static에 대응됨.
 //        클래스이름.기능() 로 활용 가능.
 
@@ -23,15 +23,15 @@ class ServerUtil {
 
 //        로그인 함수
 
-        fun postRequestLogIn( email: String, pw: String, handler: JsonResponseHandler? ){
+        fun postRequestLogIn(email: String, pw: String, handler: JsonResponseHandler?) {
 
 //            1. 어디로 가야? URL
             val urlString = "${HOST_URL}/user"
 
 //            2. 어떤 데이터를 들고가는가? (파라미터)
             val formData = FormBody.Builder()
-                .add("email",email)
-                .add("password",pw)
+                .add("email", email)
+                .add("password", pw)
                 .build()
 
 //            3. 어떤 메쏘드 + 1/2 데이터 결합 => 어떤 요청인지 완성
@@ -45,7 +45,7 @@ class ServerUtil {
 
             val client = OkHttpClient()
 
-            client.newCall(request).enqueue( object : Callback {
+            client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
 
 //                    실패 : 물리적 접속 실패.
@@ -66,11 +66,10 @@ class ServerUtil {
 //                    일반 String -> JSONobject로 변환 (한글도 원상복구)
                     val jsonObj = JSONObject(bodyString)
 
-                    Log.d("서버응답",jsonObj.toString())
+                    Log.d("서버응답", jsonObj.toString())
 
 //                    나를 호출한 화면에게 jsonObj를 처리하는 일처리를 미루자.
-                   handler?.onResponse(jsonObj)
-
+                    handler?.onResponse(jsonObj)
 
 
                 }
@@ -80,8 +79,6 @@ class ServerUtil {
 
 
         }
-
-
 
 
     }

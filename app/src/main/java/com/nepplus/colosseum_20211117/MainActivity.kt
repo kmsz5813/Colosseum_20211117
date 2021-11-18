@@ -1,5 +1,6 @@
 package com.nepplus.colosseum_20211117
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +24,14 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        binding.btnLoginUp.setOnClickListener {
+
+            val myIntent = Intent(mContext, SignUpActivity::class.java)
+            startActivity(myIntent)
+
+        }
+
 
         binding.btnLogin.setOnClickListener {
 
@@ -51,6 +60,7 @@ class MainActivity : BaseActivity() {
                                 Toast.makeText(mContext, "존재하지 않은 이메일입니다.", Toast.LENGTH_SHORT)
                                     .show()
 
+                                val message = jsonObj.getString("message")
 //                                message String으로 실패 사유를 알려준다.
 //                                JSON 파싱으로 추출해서 -> "로그인 실패" 대신 서버가 알려준 실패 사유를 띄우자.
 
