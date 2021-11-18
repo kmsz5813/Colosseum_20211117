@@ -21,9 +21,17 @@ class ServerUtil {
 
         val HOST_URL = "http://54.180.52.26"
 
+
+
+
+
 //        로그인 함수
 
         fun postRequestLogIn(email: String, pw: String, handler: JsonResponseHandler?) {
+
+
+
+
 
 //            1. 어디로 가야? URL
             val urlString = "${HOST_URL}/user"
@@ -76,6 +84,48 @@ class ServerUtil {
 
 
             })
+
+
+        }
+
+        fun putRequestSignup( eamil:String, pw:String, nickname:String, handler: JsonResponseHandler?){
+
+
+            val urlString = "${HOST_URL}/user"
+
+            val forData = FormBody.Builder()
+                .add("eamil", eamil)
+                .add("password",pw)
+                .add("nick_name",nickname)
+                .build()
+
+            val request = Request.Builder()
+                .url(urlString)
+                .put(forData)
+                .build()
+
+
+            val client = OkHttpClient()
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+
+                    val bodyString = response.body!!.string()
+                    val jsonObj = JSONObject( bodyString )
+                    Log.d("서버응답", jsonObj.toString())
+                    handler?.onResponse(jsonObj)
+
+
+                }
+
+
+            } )
+
+
+
 
 
         }
